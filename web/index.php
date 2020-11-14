@@ -4,6 +4,15 @@
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
 
+function vd($var, $exit = true)
+{
+    $dumper = new yii\helpers\BaseVarDumper();
+    echo $dumper::dump($var, 10, true);
+    if ($exit) {
+        exit;
+    }
+}
+
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 
