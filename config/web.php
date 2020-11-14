@@ -50,6 +50,10 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'products' => 'product/index',
+                'sells' => 'sell/index',
+                'sell' => 'sell/create',
+
                 'home' => 'site/index',
                 'about' => 'site/about',
                 'contact' => 'site/contact',

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "product".
@@ -51,5 +52,33 @@ class Product extends \yii\db\ActiveRecord
             'date' => 'Sanasi',
             'batch_number' => 'Partiya raqami'
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSells()
+    {
+        return $this->hasMany(Sell::className(), ['product_id' => 'id']);
+    }
+
+    // public static function _all()
+    // {
+    //     return ArrayHelper::map(self::find()->asArray()->all(), 'id', 'name');
+    // }
+
+    public static function _all()
+    {
+        $res = [];
+        $products = self::find()->all();
+
+        foreach($products as $product) {
+            if($product->batch_number) {
+                $res[$product->id] = $product->name . ' (' . $product->batch_number . ')';
+            } else {
+                $res[$product->id] = $product->name;
+            }
+        }
+        return $res;
     }
 }

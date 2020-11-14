@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Product */
+/* @var $model app\models\Sell */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Maxsulotlar', 'url' => ['index']];
+$this->title = $model->product->name;
+$this->params['breadcrumbs'][] = ['label' => 'Sotilgan mahsulotlar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="product-view">
+<div class="sell-view">
 
     <h3><?= Html::encode($this->title) ?></h3>
 
@@ -29,31 +29,36 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'name',
+            // 'id',
             [
-                'attribute' => 'price',
+                'attribute' => 'product_id',
                 'value' => function($model) {
-                    return number_format($model->price, 2);
-                },
-                'filterInputOptions' => ['class' => 'form-control']
-            ],
-            'quantity',
-            [
-                'attribute' => 'date',
-                'value' => function($model) {
-                    return date('d.m.Y', strtotime($model->date));
+                    return $model->product->name;
                 }
             ],
             [
-                'attribute' => 'batch_number',
+                'attribute' => 'sell_price',
                 'value' => function($model) {
-                    return ($model->batch_number)? $model->batch_number: "<span class='text-danger'><i>Qiymatlanmagan</i></span>";
+                    return number_format($model->sell_price, 2);
+                },
+                'filterInputOptions' => ['class' => 'form-control']
+            ],
+            'sell_quantity',
+            [
+                'attribute' => 'sell_date',
+                'value' => function($model) {
+                    return date('d.m.Y', strtotime($model->sell_date));
+                }
+            ],
+            [
+                'attribute' => 'sell_batch_number',
+                'value' => function($model) {
+                    return ($model->sell_batch_number)? $model->sell_batch_number: "<span class='text-danger'><i>Qiymatlanmagan</i></span>";
                 },
                 'filterInputOptions' => ['class' => 'form-control'],
                 'format' => 'html'
             ]
-        ]
+        ],
     ]) ?>
 
 </div>

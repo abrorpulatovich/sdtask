@@ -5,18 +5,18 @@ use yii\grid\GridView;
 use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\search_models\ProductSearch */
+/* @var $searchModel app\models\search_models\SellSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Maxsulotlar';
+$this->title = 'Sotilgan mahsulotlar';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-index">
+<div class="sell-index">
 
     <h3><?= Html::encode($this->title) ?></h3>
 
     <p>
-        <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Sotish', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,30 +30,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
             // 'id',
             [
-                'attribute' => 'name',
-                'value' => 'name',
-                'filterInputOptions' => ['class' => 'form-control']
+                'attribute' => 'product_id',
+                'value' => function($model) {
+                    return $model->product->name;
+                },
+                'filter' => $products
             ],
             [
-                'attribute' => 'price',
+                'attribute' => 'sell_price',
                 'value' => function($model) {
-                    return number_format($model->price, 2);
+                    return number_format($model->sell_price, 2);
                 },
                 'filterInputOptions' => ['class' => 'form-control']
             ],
+            'sell_quantity',
             [
-                'attribute' => 'quantity',
-                'value' => 'quantity',
-                'filterInputOptions' => ['class' => 'form-control']
-            ],
-            [
-                'attribute' => 'date',
+                'attribute' => 'sell_date',
                 'value' => function($model) {
-                    return date('d.m.Y', strtotime($model->date));
+                    return date('d.m.Y', strtotime($model->sell_date));
                 },
                 'filter' => DatePicker::widget([
-                    'id' => 'date',
-                    'name' => 'ProductSearch[date]',
+                    'id' => 'sell_date',
+                    'name' => 'SellSearch[sell_date]',
                     'options' => ['placeholder' => '---'],
                     'pluginOptions' => [
                         'format' => 'yyyy-mm-dd',
@@ -63,14 +61,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterInputOptions' => ['class' => 'form-control']
             ],
             [
-                'attribute' => 'batch_number',
+                'attribute' => 'sell_batch_number',
                 'value' => function($model) {
-                    return ($model->batch_number)? $model->batch_number: "<span class='text-danger'><i>Qiymatlanmagan</i></span>";
+                    return ($model->sell_batch_number)? $model->sell_batch_number: "<span class='text-danger'><i>Qiymatlanmagan</i></span>";
                 },
                 'filterInputOptions' => ['class' => 'form-control'],
                 'format' => 'html'
             ],
-            ['class' => 'yii\grid\ActionColumn']
-        ]
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
     ]); ?>
+
+
 </div>

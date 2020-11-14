@@ -39,7 +39,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Maxsulotlar', 'url' => ['/product/index']],
-            ['label' => 'Sotish', 'url' => ['/product/sell']],
+            ['label' => 'Sotish', 'url' => ['/sell/create']],
             ['label' => 'Hisobot', 'url' => ['/report/product']]
         ],
     ]);
@@ -53,6 +53,7 @@ AppAsset::register($this);
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
+
 </div>
 
 <footer class="footer">
@@ -60,6 +61,8 @@ AppAsset::register($this);
         <p class="pull-left">&copy; Abror Eshkabilov <?= date('Y') ?></p>
     </div>
 </footer>
+
+
 
 <?php $this->endBody() ?>
 </body>

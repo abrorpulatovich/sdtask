@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66d750299dc996d176a3b23ab1553773",
+    "content-hash": "8bbbe5afaba57878d5754932dcf4587c",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -1214,16 +1214,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-select2",
-            "version": "v2.2.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "ee9d54f9af745c0ad7b3578bf640c12d800479e3"
+                "reference": "dbfe450bfea42f10a5b9e6f7a0831cbdae495fb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/ee9d54f9af745c0ad7b3578bf640c12d800479e3",
-                "reference": "ee9d54f9af745c0ad7b3578bf640c12d800479e3",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/dbfe450bfea42f10a5b9e6f7a0831cbdae495fb4",
+                "reference": "dbfe450bfea42f10a5b9e6f7a0831cbdae495fb4",
                 "shasum": ""
             },
             "require": {
@@ -1264,7 +1264,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2020-09-28T15:15:52+00:00"
+            "time": "2020-09-29T08:00:46+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-sidenav",
@@ -6131,7 +6131,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kartik-v/yii2-widget-datepicker": 20
+        "kartik-v/yii2-widget-datepicker": 20,
+        "kartik-v/yii2-widget-select2": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
