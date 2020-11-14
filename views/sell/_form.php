@@ -44,9 +44,8 @@ use kartik\date\DatePicker;
     <div class="row">
         <div class="col-md-4">
             <?php
-                echo '<label for="sell_date">Sanasi</label>';
+                echo '<label>Sanasi</label>';
                 echo DatePicker::widget([
-                    'id' => 'sell_date',
                     'name' => 'Sell[sell_date]',
                     'value' => date('Y-m-d'),
                     'options' => ['placeholder' => '---'],

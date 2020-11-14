@@ -1,3 +1,3 @@
-$('#sell-product_id').on('change', function() {
+$('#sell-product_id').change(function() {
     alert('hey');
 });
