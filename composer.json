@@ -21,7 +21,8 @@
         "kartik-v/yii2-widgets": "*",
         "2amigos/yii2-date-picker-widget": "~1.0",
         "kartik-v/yii2-widget-datepicker": "dev-master",
-        "kartik-v/yii2-widget-select2": "dev-master"
+        "kartik-v/yii2-widget-select2": "dev-master",
+        "trntv/yii2-datetime-widget": "^1.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

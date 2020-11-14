@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'sell_date',
                 'value' => function($model) {
-                    return date('d.m.Y', strtotime($model->sell_date));
+                    return date('d.m.Y H:i:s', strtotime($model->sell_date));
                 },
                 'filter' => DatePicker::widget([
                     'id' => 'sell_date',

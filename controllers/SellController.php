@@ -68,8 +68,12 @@ class SellController extends Controller
     public function actionCreate()
     {
         $model = new Sell();
+        $model->sell_date = date('Y-m-d H:i:s');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            vd($model);
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

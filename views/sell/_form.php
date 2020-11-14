@@ -3,9 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Product;
-use kartik\select2\Select2;
 use yii\web\View;
-use kartik\date\DatePicker;
+use kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Sell */
@@ -19,13 +18,12 @@ use kartik\date\DatePicker;
 
     <div class="row">
         <div class="col-md-4">
-            <?= $form->field($model, 'product_id')->widget(Select2::classname(), [
-                'data' => Product::_all(),
-                'options' => ['placeholder' => '---'],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]); ?>
+            <?= $form->field($model, 'product_id')
+                ->dropDownList(Product::_all(), [
+                    'class' => 'form-control',
+                    'style' => "width: 100%",
+                    'prompt' => '---'
+            ]) ?>
         </div>
     </div>
 
@@ -44,13 +42,24 @@ use kartik\date\DatePicker;
     <div class="row">
         <div class="col-md-4">
             <?php
+                // echo '<label>Sanasi</label>';
+                // echo DatePicker::widget([
+                //     'name' => 'Sell[sell_date]',
+                //     'value' => date('Y-m-d'),
+                //     'options' => ['placeholder' => '---'],
+                //     'pluginOptions' => [
+                //         'format' => 'yyyy-mm-dd',
+                //         'todayHighlight' => true
+                //     ]
+                // ]);
+
                 echo '<label>Sanasi</label>';
-                echo DatePicker::widget([
+                echo DateTimePicker::widget([
                     'name' => 'Sell[sell_date]',
-                    'value' => date('Y-m-d'),
                     'options' => ['placeholder' => '---'],
+                    'convertFormat' => true,
                     'pluginOptions' => [
-                        'format' => 'yyyy-mm-dd',
+                        'format' => 'yyyy-MM-dd H:i:s',
                         'todayHighlight' => true
                     ]
                 ]);
@@ -68,9 +77,7 @@ use kartik\date\DatePicker;
         <div class="col-md-4">
             <?= Html::submitButton('Saqlash', ['class' => 'btn btn-primary']) ?>
         </div>
-    </div>    
-
+    </div>
     <?php ActiveForm::end(); ?>
-
 </div>
 <?php $this->registerJsFile("/js/sell.js", ['position' => View::POS_END]) ?>

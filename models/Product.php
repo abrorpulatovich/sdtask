@@ -70,7 +70,7 @@ class Product extends \yii\db\ActiveRecord
     public static function _all()
     {
         $res = [];
-        $products = self::find()->all();
+        $products = self::find()->where(['status' => 1])->all();
 
         foreach($products as $product) {
             if($product->batch_number) {

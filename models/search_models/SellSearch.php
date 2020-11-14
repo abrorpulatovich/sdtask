@@ -62,11 +62,11 @@ class SellSearch extends Sell
             'id' => $this->id,
             'product_id' => $this->product_id,
             'sell_price' => $this->sell_price,
-            'sell_quantity' => $this->sell_quantity,
-            'sell_date' => $this->sell_date,
+            'sell_quantity' => $this->sell_quantity
         ]);
 
-        $query->andFilterWhere(['like', 'sell_batch_number', $this->sell_batch_number]);
+        $query->andFilterWhere(['like', 'sell_batch_number', $this->sell_batch_number])
+              ->andFilterWhere(['like', 'sell_date', $this->sell_date]);
 
         return $dataProvider;
     }

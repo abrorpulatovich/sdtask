@@ -67,7 +67,9 @@ class ProductController extends Controller
     {
         $model = new Product();
 
-        if ($model->load(Yii::$app->request->post()) and $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->status = 1; // 1 bu skladda hali tugamadi degani.
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
