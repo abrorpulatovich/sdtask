@@ -145,14 +145,6 @@ class SellController extends Controller
         }
     }
 
-    // 100 + 200 = 300
-    // 250
-    // 200
-    // 150
-    
-    // 200
-    // 250
-
     /**
      * Updates an existing Sell model.
      * If update is successful, the browser will be redirected to the 'view' page.
