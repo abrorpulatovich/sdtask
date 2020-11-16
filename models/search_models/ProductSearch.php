@@ -56,7 +56,7 @@ class ProductSearch extends Product
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        $query->andFilterWhere(['>', 'quantity', 0]);
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
