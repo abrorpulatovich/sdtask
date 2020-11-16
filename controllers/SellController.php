@@ -72,7 +72,10 @@ class SellController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            vd($model);
+            $product_id = $model->product_id;
+            $product = Product::findOne($product_id);
+            $product->quantity = ($product->quantity - $model->sell_quantity);
+            $product->save();
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -130,5 +133,25 @@ class SellController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionCheckCount($product_id, $sell_quantity)
+    {
+        $product = Product::findOne($product_id);
+
+        if(!$product_id) {
+            $result = [
+                'success' => false,
+                'message' => 'Maxsulot topilmadi'
+            ];
+        } else {
+            if($product->quantity == 0 or $product->quantity < $sell_quantity) {
+                $result = [
+                    'success' => false,
+                    'message' => 'Omborda ushbu maxsulotdan ' . $product->quantity . ' ta qolgan'
+                ];
+            } 
+        }
+        echo json_encode($result);
     }
 }

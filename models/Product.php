@@ -70,13 +70,15 @@ class Product extends \yii\db\ActiveRecord
     public static function _all()
     {
         $res = [];
-        $products = self::find()->where(['status' => 1])->all();
+        $products = self::find()->where(['>', 'quantity', 0])->all();
 
         foreach($products as $product) {
+
+            $str = ' (' . date('d.m.Y', strtotime($product->date)) . ')';
             if($product->batch_number) {
-                $res[$product->id] = $product->name . ' (' . $product->batch_number . ')';
+                $res[$product->id] = $product->name . ' (' . $product->batch_number . ')' . $str;
             } else {
-                $res[$product->id] = $product->name;
+                $res[$product->id] = $product->name . $str;
             }
         }
         return $res;

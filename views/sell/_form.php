@@ -42,19 +42,9 @@ use kartik\datetime\DateTimePicker;
     <div class="row">
         <div class="col-md-4">
             <?php
-                // echo '<label>Sanasi</label>';
-                // echo DatePicker::widget([
-                //     'name' => 'Sell[sell_date]',
-                //     'value' => date('Y-m-d'),
-                //     'options' => ['placeholder' => '---'],
-                //     'pluginOptions' => [
-                //         'format' => 'yyyy-mm-dd',
-                //         'todayHighlight' => true
-                //     ]
-                // ]);
-
-                echo '<label>Sanasi</label>';
+                echo '<label for="sell_date">Sanasi</label>';
                 echo DateTimePicker::widget([
+                    'id' => 'sell-sell_date',
                     'name' => 'Sell[sell_date]',
                     'options' => ['placeholder' => '---'],
                     'convertFormat' => true,
@@ -80,4 +70,6 @@ use kartik\datetime\DateTimePicker;
     </div>
     <?php ActiveForm::end(); ?>
 </div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php $this->registerJsFile("/js/sell.js", ['position' => View::POS_END]) ?>
