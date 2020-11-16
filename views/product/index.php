@@ -18,6 +18,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
+    
+    <?php if(Yii::$app->session->hasFlash('successfully_deleted')): ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success"><?= Yii::$app->session->getFlash('successfully_deleted') ?></div>
+            </div>
+        </div>
+    <?php endif ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -80,6 +80,7 @@ class SellController extends Controller
             } else {
                 $this->sellByFIFO($model);
             }
+            Yii::$app->session->setFlash('successfully_sold', 'Maxsulot muvaffaqiyatli sotildi');
             return $this->redirect(['index']);
         }
 
@@ -182,7 +183,7 @@ class SellController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        Yii::$app->session->setFlash('successfully_deleted', 'Sotuv muvaffaqiyatli o\'chirildi');
         return $this->redirect(['index']);
     }
 

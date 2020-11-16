@@ -15,6 +15,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h3><?= Html::encode($this->title) ?></h3>
 
+    <?php if(Yii::$app->session->hasFlash('successfully_sold')): ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success"><?= Yii::$app->session->getFlash('successfully_sold') ?></div>
+            </div>
+        </div>
+    <?php endif ?>
+
+    <?php if(Yii::$app->session->hasFlash('successfully_deleted')): ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success"><?= Yii::$app->session->getFlash('successfully_deleted') ?></div>
+            </div>
+        </div>
+    <?php endif ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
