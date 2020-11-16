@@ -24,7 +24,7 @@ class Report
             $to = trim(explode('-', $range_dates)[1]);
 
             $from_explode = explode('/', $from);
-            $from = $from_explode[2] . '-' . $from_explode[0] . '-' . $from_explode[1] . ' 23:59:00';
+            $from = $from_explode[2] . '-' . $from_explode[0] . '-' . $from_explode[1] . ' 00:00:00';
 
             $to_explode = explode('/', $to);
             $to = $to_explode[2] . '-' . $to_explode[0] . '-' . $to_explode[1] . ' 23:59:00';

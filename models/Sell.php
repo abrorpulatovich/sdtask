@@ -49,7 +49,7 @@ class Sell extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'product_id' => 'Mahsulot',
-            'sell_price' => 'Narxi',
+            'sell_price' => 'Narxi(so\'m)',
             'sell_quantity' => 'Soni',
             'sell_date' => 'Sanasi',
             'sell_batch_number' => 'Partiya raqami',

@@ -75,10 +75,12 @@ class Product extends \yii\db\ActiveRecord
         foreach($products as $product) {
 
             $str = ' (' . date('d.m.Y', strtotime($product->date)) . ')';
+            $rest = ' ( ' . $product->quantity . ' ta qoldi )';
+
             if($product->batch_number) {
-                $res[$product->id] = $product->name . ' (' . $product->batch_number . ')' . $str;
+                $res[$product->id] = $product->name . ' (' . $product->batch_number . ')' . $str . $rest;
             } else {
-                $res[$product->id] = $product->name . $str;
+                $res[$product->id] = $product->name . $str . $rest;
             }
         }
         return $res;

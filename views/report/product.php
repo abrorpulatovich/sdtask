@@ -36,7 +36,7 @@ $this->title = 'Hisobot';
                         <tr>
                             <td><?= $inc ?></td>
                             <td><?= date('d/m/y H:i', strtotime($item['sell_date'])) ?></td>
-                            <td><?= $item['product_name'] ?></td>
+                            <td><?= $item['product_name'] . (($item['product_batch_number'])? ' (' . $item['product_batch_number'] . ')': ' (<span class="text-danger"><i>Partiya raqami qiymatlanmagan</i></span>)') ?></td>
                             <td align='right'><?= number_format($item['sell_price'] * $item['sell_quantity'], 2) ?></td>
                             <td align='right'><?= number_format($item['product_price'] * $item['sell_quantity'], 2) ?></td>
                             <td align='right'><?= number_format(($item['sell_price'] * $item['sell_quantity']) - ($item['product_price'] * $item['sell_quantity']), 2) ?></td>

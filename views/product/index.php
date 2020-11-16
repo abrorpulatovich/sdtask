@@ -29,7 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'id',
             [
                 'attribute' => 'name',
-                'value' => 'name',
+                'value' => function($model) {
+                    return ($model->batch_number)? $model->name . ' (' . $model->batch_number . ')': $model->name;
+                },
                 'filterInputOptions' => ['class' => 'form-control']
             ],
             [

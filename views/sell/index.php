@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'product_id',
                 'value' => function($model) {
-                    return $model->product->name;
+                    return ($model->product and $model->product->batch_number)? $model->product->name . ' (' . $model->product->batch_number . ')': $model->product->name;
                 },
                 'filter' => $products
             ],

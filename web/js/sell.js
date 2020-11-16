@@ -21,6 +21,7 @@ $('#sell-sell_quantity').on('blur', function() {
                     result.message,
                     "warning"
                 );
+                $('#sell-sell_quantity').val('');
             },
             error: function () {
             }

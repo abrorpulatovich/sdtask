@@ -72,18 +72,85 @@ class SellController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $product_id = $model->product_id;
-            $product = Product::findOne($product_id);
-            $product->quantity = ($product->quantity - $model->sell_quantity);
-            $product->save();
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            $product = Product::findOne($model->product_id);
+            if($product and $product->batch_number) {
+                $product->quantity = ($product->quantity - $model->sell_quantity);
+                $product->save(false);
+                $model->save();
+            } else {
+                $this->sellByFIFO($model);
+            }
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
             'model' => $model
         ]);
     }
+
+    private function get_same_products($name, $price)
+    {
+        $products = Product::find()
+                            ->where(['name' => $name])
+                            ->andWhere(['batch_number' => ''])
+                            ->andWhere(['price' => $price])
+                            ->orderBy(['date' => SORT_ASC])
+                            ->all();
+        return $products;
+    }
+
+    private function sellByFIFO($model)
+    {
+        $product_id = $model->product_id;
+        $product = Product::findOne($product_id);
+        $products = $this->get_same_products($product->name, $product->price);
+
+        $required_quantity = $model->sell_quantity;
+
+        if($required_quantity < $product->quantity) {
+            $product->quantity = ($product->quantity - $required_quantity);
+            $product->save(false);
+            $model->save();
+        } else {
+            $all_existing_quantity = 0;
+
+            foreach($products as $p) {
+                $all_existing_quantity += $p->quantity;
+            }
+
+            foreach($products as $p) {
+
+                $sell = new Sell();
+                $sell->product_id = $product->id;
+                $sell->sell_price = $model->sell_price;
+                $sell->sell_date = $model->sell_date;
+                $sell->sell_batch_number = $model->sell_batch_number;
+
+                if($required_quantity <= $all_existing_quantity) {
+
+                    $sell->sell_quantity = $p->quantity;
+                    $all_existing_quantity -= $p->quantity;
+                    $last_p_quantity = $p->quantity;
+                    $p->quantity = 0;
+
+                } else {
+                    $sell->sell_quantity = ($required_quantity - $last_p_quantity);
+                    $all_existing_quantity -= $sell->sell_quantity;
+                    $p->quantity = $all_existing_quantity;
+                }
+                $p->save(false);
+                $sell->save(false);
+            }
+        }
+    }
+
+    // 100 + 200 = 300
+    // 250
+    // 200
+    // 150
+    
+    // 200
+    // 250
 
     /**
      * Updates an existing Sell model.
@@ -139,19 +206,29 @@ class SellController extends Controller
     {
         $product = Product::findOne($product_id);
 
-        if(!$product_id) {
-            $result = [
-                'success' => false,
-                'message' => 'Maxsulot topilmadi'
-            ];
-        } else {
-            if($product->quantity == 0 or $product->quantity < $sell_quantity) {
+        if($product and $product->batch_number) {
+            if($product->quantity < $sell_quantity) {
                 $result = [
                     'success' => false,
-                    'message' => 'Omborda ushbu maxsulotdan ' . $product->quantity . ' ta qolgan'
+                    'message' => 'Narxi ' . $product->price . ' so\'m bo\'lgan ' . $product->name . 'dan omborda jami ' . $product->quantity . ' ta qolgan'
                 ];
-            } 
+            }
+        } elseif($product and !$product->batch_number) {
+            $products = $this->get_same_products($product->name, $product->price);
+            $all_existing_quantity = 0;
+    
+            foreach($products as $p) {
+                $all_existing_quantity += $p->quantity;
+            }
+
+            if($all_existing_quantity < $sell_quantity) {
+                $result = [
+                    'success' => false,
+                    'message' => 'Narxi ' . $product->price . ' so\'m bo\'lgan ' . $product->name . 'dan omborda jami ' . $all_existing_quantity . ' ta qolgan'
+                ];
+            }
         }
+        
         echo json_encode($result);
     }
 }

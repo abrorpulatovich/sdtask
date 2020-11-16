@@ -71,5 +71,5 @@ use kartik\datetime\DateTimePicker;
     <?php ActiveForm::end(); ?>
 </div>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/js/libs/sweetalert.min.js"></script>
 <?php $this->registerJsFile("/js/sell.js", ['position' => View::POS_END]) ?>
